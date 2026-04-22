@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Greco | The Estate by Andrew Mikeladze</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Oswald:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --greek-blue: #004C97;
+            --greek-gold: #D4AF37;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --footer-bg: #0A192F; 
+            --accent-soft: rgba(0, 76, 151, 0.05);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--text-dark); 
+            line-height: 1.7; 
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%;
+            background: var(--white);
+            position: sticky; top: 0; z-index: 2000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            nav { padding: 20px 8%; }
+        }
+
+        .logo-wrapper { display: flex; flex-direction: column; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--greek-blue); letter-spacing: 4px; line-height: 1; }
+        .logo-sub { font-size: 0.55rem; letter-spacing: 2px; color: var(--greek-gold); margin-top: 5px; font-weight: 600; }
+        
+        @media (min-width: 768px) {
+            .logo { font-size: 2rem; letter-spacing: 6px; }
+            .logo-sub { font-size: 0.6rem; letter-spacing: 3px; }
+        }
+
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .lang-switcher { display: flex; gap: 8px; padding: 6px 12px; background: var(--accent-soft); border-radius: 50px; }
+        .flag { width: 20px; height: 20px; cursor: pointer; border-radius: 50%; object-fit: cover; transition: var(--transition); border: 2px solid transparent; }
+        
+        @media (min-width: 768px) {
+            .flag { width: 24px; height: 24px; }
+            .lang-switcher { gap: 12px; padding: 8px 15px; }
+        }
+
+        .flag:hover { transform: scale(1.2); border-color: var(--greek-blue); }
+        .flag.active { border-color: var(--greek-gold); }
+
+   
+        .hero {
+            position: relative; height: 80vh; min-height: 500px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)), 
+                        url('https://www.chenabgourmet.com/wp-content/uploads/2022/05/Blog-Designs-12.png');
+            background-size: cover; background-position: center; background-attachment: scroll;
+            color: white; text-align: center; overflow: hidden;
+            padding: 20px;
+        }
+        
+        @media (min-width: 1024px) {
+            .hero { background-attachment: fixed; }
+        }
+
+        .hero h1 { font-size: clamp(2.2rem, 8vw, 5.5rem); text-shadow: 0 10px 30px rgba(0,0,0,0.5); line-height: 1.1; margin-bottom: 15px; }
+        .hero p { font-size: clamp(0.9rem, 4vw, 1.4rem); color: var(--greek-gold); font-weight: 400; letter-spacing: 3px; text-transform: uppercase; }
+
+    
+        .section-padding { padding: 60px 5%; }
+        @media (min-width: 768px) {
+            .section-padding { padding: 100px 8%; }
+        }
+
+        .story-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; max-width: 1400px; margin: 0 auto; }
+        @media (min-width: 992px) { 
+            .story-grid { grid-template-columns: 1fr 1fr; gap: 80px; } 
+        }
+        
+        .story-img-container { position: relative; width: 95%; margin: 0 auto; }
+        .story-img-container img { width: 100%; height: auto; border-radius: 4px; position: relative; z-index: 2; box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
+        .story-img-container::before { content: ""; position: absolute; top: -15px; left: -15px; width: 100%; height: 100%; border: 5px solid var(--greek-blue); z-index: 1; }
+        
+        @media (min-width: 768px) {
+            .story-img-container::before { top: -30px; left: -30px; border-width: 10px; }
+        }
+
+        .story-text h2 { font-size: clamp(2rem, 5vw, 3rem); color: var(--greek-blue); margin-bottom: 20px; line-height: 1.2; }
+        .story-text p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 20px; }
+        .signature-box { margin-top: 30px; border-top: 1px solid #E2E8F0; padding-top: 20px; }
+        .signature { font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--greek-gold); }
+
+
+        .section-header { text-align: center; max-width: 800px; margin: 0 auto 40px; }
+        .section-header h2 { font-size: clamp(2.2rem, 6vw, 3.5rem); color: var(--greek-blue); margin-bottom: 15px; }
+        .section-header .divider { width: 80px; height: 4px; background: var(--greek-gold); margin: 0 auto; }
+
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .menu-category { background: var(--white); border-radius: 20px; overflow: hidden; transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
+        .menu-category:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+        
+        .cat-hero { height: 250px; position: relative; overflow: hidden; }
+        @media (min-width: 768px) { .cat-hero { height: 350px; } }
+        .cat-hero img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+        .menu-category:hover .cat-hero img { transform: scale(1.1); }
+        .cat-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 25px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+
+        .menu-list { padding: 25px; }
+        @media (min-width: 768px) { .menu-list { padding: 40px; } }
+        .menu-item { margin-bottom: 25px; }
+        .item-main { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+        .item-name { font-weight: 700; font-size: 1.1rem; color: var(--greek-blue); text-transform: uppercase; }
+        .item-price { font-family: 'Oswald'; font-weight: 600; color: var(--greek-gold); font-size: 1.1rem; }
+        .item-dots { flex-grow: 1; border-bottom: 2px dotted #CBD5E1; }
+        .item-info { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: 5px; display: block; line-height: 1.4; }
+
+     
+        .res-container { background: #EEF2F6; }
+        .res-card { 
+            max-width: 1200px; margin: 0 auto; background: var(--white); 
+            display: flex; flex-direction: column; border-radius: 20px; 
+            overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.1); 
+        }
+        @media (min-width: 992px) { .res-card { flex-direction: row; border-radius: 25px; } }
+        
+        .res-info { background: var(--greek-blue); color: white; padding: 40px 30px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        @media (min-width: 768px) { .res-info { padding: 80px 60px; } }
+        .res-info h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--greek-gold); }
+        .res-info p { font-size: 1.1rem; opacity: 0.9; font-weight: 300; line-height: 1.8; }
+        
+        .res-form-side { padding: 40px 30px; flex: 1.5; }
+        @media (min-width: 768px) { .res-form-side { padding: 80px 60px; } }
+        .res-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 600px) { .res-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .full { grid-column: 1 / -1; }
+        .field-group { display: flex; flex-direction: column; gap: 8px; }
+        .field-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--greek-blue); letter-spacing: 1px; }
+        .res-form-side input { width: 100%; padding: 15px; border: 2px solid #F1F5F9; border-radius: 10px; font-family: inherit; background: #F8FAFC; }
+        .res-form-side input:focus { outline: none; border-color: var(--greek-blue); background: white; }
+        
+        .res-submit { 
+            margin-top: 10px; background: var(--greek-blue); color: white; border: none; 
+            padding: 18px; border-radius: 10px; font-weight: 700; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; transition: var(--transition);
+        }
+        .res-submit:hover { background: var(--greek-gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact-strip { background: var(--white); text-align: center; border-bottom: 1px solid #E2E8F0; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; max-width: 1400px; margin: 0 auto; }
+        @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
+        .contact-box { padding: 40px 20px; border-bottom: 1px solid #F1F5F9; }
+        @media (min-width: 768px) { .contact-box { padding: 60px 40px; border-bottom: none; border-right: 1px solid #F1F5F9; } }
+        .contact-box:last-child { border-right: none; }
+        .contact-box h4 { font-size: 0.8rem; color: var(--greek-gold); margin-bottom: 10px; }
+        .contact-box p { font-size: 1.1rem; font-weight: 600; color: var(--greek-blue); }
+        .hours-badge { display: inline-block; margin-top: 10px; padding: 5px 15px; background: #FEF3C7; color: #92400E; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+
+        footer { background: var(--footer-bg); color: var(--white); padding: 60px 5% 30px; text-align: center; }
+        .footer-logo { font-size: 1.8rem; letter-spacing: 5px; margin-bottom: 30px; opacity: 0.9; }
+        @media (min-width: 768px) { 
+            footer { padding: 100px 8% 50px; }
+            .footer-logo { font-size: 2.5rem; letter-spacing: 10px; }
+        }
+        .footer-socials { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .footer-socials a svg { width: 28px; height: 28px; fill: white; opacity: 0.6; transition: var(--transition); }
+        .footer-socials a:hover svg { opacity: 1; fill: var(--greek-gold); transform: translateY(-5px); }
+        .footer-copy { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-wrapper">
+            <span class="logo">EL GRECO</span>
+            <span class="logo-sub">BATUMI ESTATE</span>
+        </div>
+        <div class="nav-actions">
+            <div class="lang-switcher">
+                <img src="https://flagcdn.com/w40/gb.png" class="flag active" onclick="switchLang('en', this)">
+                <img src="https://flagcdn.com/w40/ge.png" class="flag" onclick="switchLang('ge', this)">
+                <img src="https://flagcdn.com/w40/gr.png" class="flag" onclick="switchLang('el', this)">
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 id="h-title">THE ESTATE OF FLAVOR</h1>
+            <p id="h-sub">BY ANDREW MIKELADZE</p>
+        </div>
+    </section>
+
+    <section class="section-padding story-section">
+        <div class="story-grid">
+            <div class="story-img-container">
+                <img src="https://www.greeka.com/photos/eastern-aegean/chios/hero/chios-island-1920.jpg" alt="Chios Greece">
+            </div>
+            <div class="story-text">
+                <h2 id="st-t">Two Cultures, One Soul</h2>
+                <p id="st-p1">Andrew Mikeladze is a man of two worlds. Born in the historic heart of Athens and raised amidst the fragrant citrus groves and mastic trees of Chios, Andrew has lived the authentic Hellenic experience from birth.</p>
+                <p id="st-p2">Now, Andrew brings that heritage to the shores of Batumi. El Greco is more than a restaurant—it is an estate dedicated to the philosophy of Philoxenia: the Greek art of making a stranger feel like a brother.</p>
+                <div class="signature-box">
+                    <span class="signature">Andrew Mikeladze</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding menu-wrapper">
+        <div class="section-header">
+            <h2 id="m-t">The Estate Menu</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-category">
+                <div class="cat-hero">
+                    <img src="https://nutriscan.app/calories-nutrition/images/greek-gyros-fcb21.webp" alt="Gyros">
+                    <div class="cat-overlay"><h3 id="mc1-t">1. The Custom Choice</h3></div>
+                </div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name" id="mi1-n">The Base</span><div class="item-dots"></div><span class="item-price">Estate</span></div>
+                        <span class="item-info" id="mi1-d">Choose between a hand-stretched sourdough pita or a nutrient-rich garden bowl.</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name" id="mi2-n">The Protein</span><div class="item-dots"></div><span class="item-price">Prime</span></div>
+                        <span class="item-info" id="mi2-d">Signature Pork Gyro, Chicken Souvlaki, or Traditional Beef bifteki.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="cat-hero">
+                    <img src="https://boldappetite.com/wp-content/uploads/2024/04/2T6A4438.jpg" alt="Octopus">
+                    <div class="cat-overlay"><h3 id="mc2-t">Signature Kitchen</h3></div>
+                </div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name" id="mi3-n">Chios Octopus</span><div class="item-dots"></div><span class="item-price">24.00</span></div>
+                        <span class="item-info" id="mi3-d">Charcoal grilled, finished with red wine vinegar, lemon, and Chian wild oregano.</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name" id="mi4-n">Mastelo Cheese</span><div class="item-dots"></div><span class="item-price">14.50</span></div>
+                        <span class="item-info" id="mi4-d">Exclusive cow-milk cheese from Chios, pan-seared and served with lemon preserve.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="cat-hero">
+                    <img src="https://www.greekgastronomyguide.gr/wp-content/uploads/2018/04/ouzo-plomariou-2020-1.jpg" alt="Ouzo">
+                    <div class="cat-overlay"><h3 id="mc3-t">The Estate Bar</h3></div>
+                </div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Mastiha Chios</span><div class="item-dots"></div><span class="item-price">9.00</span></div>
+                        <span class="item-info" id="mi5-d">Authentic liqueur made from the resin of the island's unique mastic trees.</span>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Greek Ouzo 12</span><div class="item-dots"></div><span class="item-price">7.50</span></div>
+                        <span class="item-info" id="mi6-d">The world-renowned anise-flavored spirit, served over crystal ice.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding res-container">
+        <div class="res-card">
+            <div class="res-info">
+                <h2 id="r-t">Reservations</h2>
+                <p id="r-p">"In the heart of every Greek home, there is always room for one more guest at the table." Experience the true essence of Aegean hospitality.</p>
+            </div>
+            <div class="res-form-side">
+                <form class="res-grid">
+                    <div class="field-group full">
+                        <label id="l-fn">Full Name</label>
+                        <input type="text" placeholder="e.g. Andrew Mikeladze">
+                    </div>
+                    <div class="field-group">
+                        <label id="l-gu">Guests</label>
+                        <input type="number" value="2">
+                    </div>
+                    <div class="field-group">
+                        <label id="l-da">Date</label>
+                        <input type="date">
+                    </div>
+                    <button type="submit" class="res-submit full" id="r-btn">Confirm My Table</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-strip">
+        <div class="contact-grid">
+            <div class="contact-box">
+                <h4 id="cl1">LOCATION</h4>
+                <p>Adlia 4th Deadlock, Batumi</p>
+            </div>
+            <div class="contact-box">
+                <h4 id="cl2">HOURS</h4>
+                <p>10:00 — 23:00</p>
+                <div class="hours-badge" id="h-n">Open Everyday (Closed Sundays)</div>
+            </div>
+            <div class="contact-box">
+                <h4 id="cl3">CONTACT</h4>
+                <p>+995 592 804 401</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">EL GRECO</div>
+        <div class="footer-socials">
+            <a href="#" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44-1.44-.645-1.44-1.44.645-1.44 1.44-1.44z"/></svg>
+            </a>
+            <a href="#" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+            </a>
+            <a href="mailto:elgrecobatumi@gmail.com">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+        </div>
+        <p class="footer-copy">© 2026 EL GRECO ESTATE | BY ANDREW MIKELADZE</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                hT: "THE ESTATE OF FLAVOR", hS: "BY ANDREW MIKELADZE",
+                stT: "Two Cultures, One Soul",
+                stP1: "Andrew Mikeladze is a man of two worlds. Born in the historic heart of Athens and raised amidst the fragrant citrus groves and mastic trees of Chios, Andrew has lived the authentic Hellenic experience from birth.",
+                stP2: "Now, Andrew brings that heritage to the shores of Batumi. El Greco is more than a restaurant—it is an estate dedicated to the philosophy of Philoxenia.",
+                mT: "The Estate Menu", mc1: "1. The Custom Choice", mc2: "Signature Kitchen", mc3: "The Estate Bar",
+                mi1n: "The Base", mi1d: "Choose between a hand-stretched sourdough pita or a nutrient-rich garden bowl.",
+                mi2n: "The Protein", mi2d: "Signature Pork Gyro, Chicken Souvlaki, or Traditional Beef bifteki.",
+                mi3n: "Chios Octopus", mi3d: "Charcoal grilled, finished with red wine vinegar, lemon, and Chian wild oregano.",
+                mi4n: "Mastelo Cheese", mi4d: "Exclusive cow-milk cheese from Chios, pan-seared and served with lemon preserve.",
+                mi5d: "Authentic liqueur made from the resin of the island's unique mastic trees.",
+                mi6d: "The world-renowned anise-flavored spirit, served over crystal ice.",
+                rT: "Reservations", rP: '"In the heart of every Greek home, there is always room for one more guest at the table."',
+                lfn: "Full Name", lgu: "Guests", lda: "Date", rB: "Confirm My Table",
+                cl1: "LOCATION", cl2: "HOURS", cl3: "CONTACT", hN: "Open Everyday (Closed Sundays)"
+            },
+            ge: {
+                hT: "გემოს სამფლობელო", hS: "ანდრია მიქელაძის მიერ",
+                stT: "ორი კულტურა, ერთი სული",
+                stP1: "ანდრია მიქელაძე ორი სამყაროს ადამიანია. ათენის ისტორიულ ცენტრში დაბადებული და ხიოსის ციტრუსებისა და მასტიკის ხეებს შორის გაზრდილი.",
+                stP2: "ახლა ანდრიას ეს მემკვიდრეობა ბათუმის სანაპიროზე გადმოაქვს. El Greco უფრო მეტია, ვიდრე რესტორანი - ეს არის მამული.",
+                mT: "მამულის მენიუ", mc1: "1. თქვენი არჩევანი", mc2: "ავტორული სამზარეულო", mc3: "მამულის ბარი",
+                mi1n: "ბაზა", mi1d: "აირჩიეთ ხელით გაჭიმული საფუვრიანი პიტა ან ნოყიერი ბაღის ბოული.",
+                mi2n: "პროტეინი", mi2d: "საფირმო ღორის გირო, ქათმის სუვლაკი ან ტრადიციული საქონლის ბიფტეკი.",
+                mi3n: "ხიოსის რვაფეხა", mi3d: "ნაკვერჩხალზე შემწვარი, წითელი ღვინის ძმრით, ლიმონით და ხიოსური ორეგანოთი.",
+                mi4n: "ყველი მასტელო", mi4d: "ექსკლუზიური ძროხის რძის ყველი ხიოსიდან, შემწვარი და მირთმეული ლიმონის მურაბით.",
+                mi5d: "ავთენტური ლიქიორი, რომელიც დამზადებულია კუნძულის უნიკალური მასტიკის ხეების ფისისგან.",
+                mi6d: "მსოფლიოში ცნობილი ანისულის არომატიანი სასმელი, მირთმეული ყინულით.",
+                rT: "დაჯავშნა", rP: "„ყოველი ბერძნული სახლის გულში სტუმრისთვის ადგილი ყოველთვის მოიძებნება.“",
+                lfn: "სახელი და გვარი", lgu: "სტუმრები", lda: "თარიღი", rB: "დაადასტურეთ მაგიდა",
+                cl1: "მდებარეობა", cl2: "საათები", cl3: "კონტაქტი", hN: "ღიაა ყოველდღე (კვირის გარდა)"
+            },
+            el: {
+                hT: "ΤΟ ΚΤΗΜΑ ΤΩΝ ΓΕΥΣΕΩΝ", hS: "ΑΠΟ ΤΟΝ ANDREW MIKELADZE",
+                stT: "Δύο Πολιτισμοί, Μία Ψυχή",
+                stP1: "Ο Andrew Mikeladze είναι ένας άνθρωπος δύο κόσμων. Γεννημένος στην καρδιά της Αθήνας και μεγαλωμένος ανάμεσα στα περιβόλια εσπεριδοειδών και τα μαστιχόδεντρα της Χίου.",
+                stP2: "Τώρα, ο Andrew φέρνει αυτή την κληρονομιά στις ακτές του Βατούμι. Το El Greco είναι κάτι περισσότερο από ένα εστιατόριο.",
+                mT: "Το Μενού Μας", mc1: "1. Η Επιλογή Σας", mc2: "Η Κουζίνα Μας", mc3: "Το Μπαρ Μας",
+                mi1n: "Η Βάση", mi1d: "Επιλέξτε ανάμεσα σε χειροποίητη πίτα ή ένα θρεπτικό μεσογειακό μπολ.",
+                mi2n: "Η Πρωτεΐνη", mi2d: "Γύρος χοιρινός, σουβλάκι κοτόπουλο ή παραδοσιακό μπιφτέκι.",
+                mi3n: "Χταπόδι Χίου", mi3d: "Ψητό στα κάρβουνα, με ξύδι από κόκκινο κρασί, λεμόνι και χιώτικη ρίγανη.",
+                mi4n: "Μαστέλο Χίου", mi4d: "Αποκλειστικό τυρί από τη Χίο, ψημένο στη σχάρα και σερβιρισμένο με γλυκό λεμόνι.",
+                mi5d: "Αυθεντικό λικέρ από το ρετσίνι των μοναδικών μαστιχόδεντρων του νησιού.",
+                mi6d: "Το παγκοσμίου φήμης ποτό με άρωμα γλυκάνισου, σερβιρισμένο με πάγο.",
+                rT: "Κρατήσεις", rP: '"Στην καρδιά κάθε ελληνικού σπιτιού, υπάρχει πάντα χώρος για έναν ακόμα καλεσμένο."',
+                lfn: "Ονοματεπώνυμο", lgu: "Άτομα", lda: "Ημερομηνία", rB: "Κάντε Κράτηση",
+                cl1: "ΤΟΠΟΘΕΣΙΑ", cl2: "ΩΡΑΡΙΟ", cl3: "ΕΠΙΚΟΙΝΩΝΙΑ", hN: "Ανοιχτά Καθημερινά (Εκτός Κυριακής)"
+            }
+        };
+
+        function switchLang(lang, el) {
+            const t = translations[lang];
+            document.getElementById('h-title').innerText = t.hT;
+            document.getElementById('st-t').innerText = t.stT;
+            document.getElementById('st-p1').innerText = t.stP1;
+            document.getElementById('st-p2').innerText = t.stP2;
+            document.getElementById('m-t').innerText = t.mT;
+            document.getElementById('mc1-t').innerText = t.mc1;
+            document.getElementById('mc2-t').innerText = t.mc2;
+            document.getElementById('mc3-t').innerText = t.mc3;
+            document.getElementById('mi1-n').innerText = t.mi1n;
+            document.getElementById('mi1-d').innerText = t.mi1d;
+            document.getElementById('mi2-n').innerText = t.mi2n;
+            document.getElementById('mi2-d').innerText = t.mi2d;
+            document.getElementById('mi3-n').innerText = t.mi3n;
+            document.getElementById('mi3-d').innerText = t.mi3d;
+            document.getElementById('mi4-n').innerText = t.mi4n;
+            document.getElementById('mi4-d').innerText = t.mi4d;
+            document.getElementById('mi5-d').innerText = t.mi5d;
+            document.getElementById('mi6-d').innerText = t.mi6d;
+            document.getElementById('r-t').innerText = t.rT;
+            document.getElementById('r-p').innerText = t.rP;
+            document.getElementById('l-fn').innerText = t.lfn;
+            document.getElementById('l-gu').innerText = t.lgu;
+            document.getElementById('l-da').innerText = t.lda;
+            document.getElementById('r-btn').innerText = t.rB;
+            document.getElementById('cl1').innerText = t.cl1;
+            document.getElementById('cl2').innerText = t.cl2;
+            document.getElementById('cl3').innerText = t.cl3;
+            document.getElementById('h-n').innerText = t.hN;
+            document.querySelectorAll('.flag').forEach(f => f.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
+</body>
+</html>
